@@ -1,0 +1,219 @@
+/* ── Header ── */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.scrolled {
+  background: rgba(248, 250, 252, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme='dark'] .scrolled {
+  background: rgba(15, 23, 42, 0.85);
+}
+
+/* ── Nav ── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  height: 70px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── Logo ── */
+.logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.logo:hover { opacity: 0.8; }
+.logo span  { color: var(--accent); }
+
+/* ── Desktop Links ── */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.navLink {
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  position: relative;
+}
+.navLink:hover { color: var(--primary); }
+
+.navLink.active {
+  color: var(--primary);
+  background: rgba(37, 99, 235, 0.08);
+  font-weight: 600;
+}
+
+/* ── Right Side ── */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Theme Button */
+.themeBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--card-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+.themeBtn:hover {
+  border-color: var(--primary);
+  transform: rotate(20deg);
+}
+
+/* Hire Me Button */
+.hireBtn {
+  padding: 0.52rem 1.2rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+.hireBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+/* ── Hamburger ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-1);
+  border-radius: 2px;
+  transition: var(--transition);
+  transform-origin: center;
+}
+
+/* Hamburger → X */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile Menu ── */
+.mobileMenu {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  width: 280px;
+  height: calc(100vh - 70px);
+  background: var(--card-bg);
+  border-left: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  box-shadow: var(--shadow-lg);
+}
+.mobileMenu.mobileOpen {
+  transform: translateX(0);
+}
+
+.mobileLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  list-style: none;
+}
+.mobileLink {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: var(--transition);
+}
+.mobileLink:hover,
+.mobileLink.active {
+  color: var(--primary);
+  background: rgba(37, 99, 235, 0.08);
+}
+.mobileLink.active { font-weight: 600; }
+
+.mobileHireBtn {
+  display: block;
+  text-align: center;
+  padding: 0.75rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  transition: var(--transition);
+}
+.mobileHireBtn {:hover { opacity: 0.9; }
+
+/* ── Overlay ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 998;
+  backdrop-filter: blur(2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .navLinks { display: none; }
+  .hireBtn  { display: none; }
+  .hamburger { display: flex; }
+}}
