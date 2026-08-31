@@ -52,6 +52,9 @@ export default function Navbar() {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
   }, [menuOpen]);
 
+  const handleLinkClick = () => {
+    setMenuOpen(false);
+  };
 
   const headerClass = scrolled
     ? `${styles.header} ${styles.scrolled}`
@@ -131,22 +134,24 @@ export default function Navbar() {
               : styles.mobileLink;
             return (
               <li key={link.href}>
-                
+                <a
                   href={link.href}
                   className={mobileLinkClass}
-                
+                  onClick={handleLinkClick}
+                >
                   {link.label}
-                
+                </a>
               </li>
             );
           })}
         </ul>
-        
+        <a
           href="#contact"
           className={styles.mobileHireBtn}
-        
+          onClick={handleLinkClick}
+        >
           Hire Me
-        
+        </a>
       </div>
 
       {/* Overlay */}
