@@ -1,0 +1,238 @@
+/* ── Experience Section ── */
+.experience {
+  padding: 100px 5%;
+  background: var(--bg);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: 100px;
+  padding: 0.35rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-1);
+  margin-bottom: 1rem;
+}
+.title span { color: var(--primary); }
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--text-2);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ── Timeline ── */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-bottom: 5rem;
+}
+
+/* Vertical center line */
+.line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--primary),
+    var(--accent),
+    transparent
+  );
+  opacity: 0.4;
+}
+
+/* ── Row ── */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Even rows — card on left */
+.rowLeft .card  { order: 1; text-align: right; }
+.rowLeft .dotWrap { order: 2; }
+.rowLeft .empty { order: 3; }
+
+/* Odd rows — card on right */
+.rowRight .empty  { order: 1; }
+.rowRight .dotWrap { order: 2; }
+.rowRight .card   { order: 3; text-align: left; }
+
+/* ── Card ── */
+.card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.rowLeft .cardTop {
+  justify-content: flex-end;
+}
+
+.year {
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+}
+
+.company {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.cardDesc {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* ── Center Dot ── */
+.dotWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  background: var(--primary);
+  border-radius: 50%;
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 3px var(--primary);
+  flex-shrink: 0;
+}
+
+/* Empty placeholder */
+.empty { min-height: 1px; }
+
+/* ── Bottom CTA ── */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.ctaText {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.35);
+}
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37, 99, 235, 0.45);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .row {
+    grid-template-columns: 24px 1fr;
+    gap: 1rem;
+  }
+
+  .line {
+    left: 11px;
+    transform: none;
+  }
+
+  .rowLeft .card,
+  .rowRight .card {
+    order: 2;
+    text-align: left;
+  }
+
+  .rowLeft .dotWrap,
+  .rowRight .dotWrap {
+    order: 1;
+  }
+
+  .rowLeft .cardTop,
+  .rowRight .cardTop {
+    justify-content: flex-start;
+  }
+
+  .rowLeft .empty,
+  .rowRight .empty {
+    display: none;
+  }
+}

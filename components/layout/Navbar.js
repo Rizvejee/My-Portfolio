@@ -29,23 +29,25 @@ export default function Navbar() {
 
   // Active section detection
   useEffect(() => {
-    const sections = navLinks.map((l) => l.href.replace('#', ''));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
+  const sections = navLinks.map((l) => l.href.replace('#', ''));
+
+  const onScroll = () => {
+    let current = 'home';
     sections.forEach((id) => {
       const el = document.getElementById(id);
-      if (el) observer.observe(el);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 100) {
+          current = id;
+        }
+      }
     });
-    return () => observer.disconnect();
-  }, []);
+    setActiveSection(current);
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  return () => window.removeEventListener('scroll', onScroll);
+}, []);
 
   // Mobile menu کھلا ہو تو scroll بند کریں
   useEffect(() => {
