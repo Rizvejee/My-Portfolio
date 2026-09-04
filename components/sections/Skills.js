@@ -1,5 +1,5 @@
 'use client';
-
+import AnimateOnScroll from '@/components/ui/AnimateOnScroll';
 import { skills } from '@/data/index';
 import styles from './Skills.module.css';
 
@@ -35,7 +35,8 @@ export default function Skills() {
       <div className={styles.container}>
 
         {/* Header */}
-        <div className={styles.header}>
+        <AnimateOnScroll variant="fadeUp">
+          <div className={styles.header}>
           <span className={styles.tag}>My Skills</span>
           <h2 className={styles.title}>
             Tech <span>Stack</span>
@@ -44,11 +45,13 @@ export default function Skills() {
             Technologies and tools I use to bring ideas to life.
           </p>
         </div>
+        </AnimateOnScroll>
 
         {/* Skills Grid */}
         <div className={styles.grid}>
-          {skills.map((group) => (
-            <div key={group.category} className={styles.card}>
+           {skills.map((group, i) => (
+        <AnimateOnScroll key={group.category} variant="fadeUp" delay={i * 0.1}>
+            <div className={styles.card}>
 
               {/* Card Header */}
               <div className={styles.cardHeader}>
@@ -57,7 +60,7 @@ export default function Skills() {
                 </span>
                 <h3 className={styles.cardTitle}>{group.category}</h3>
               </div>
-
+                 
               {/* Skill Items */}
               <div className={styles.skillList}>
                 {group.items.map((skill) => (
@@ -79,10 +82,11 @@ export default function Skills() {
               </div>
 
             </div>
-          ))}
+          
+        </AnimateOnScroll>
+        ))}
         </div>
-
-      </div>
+        </div>
     </section>
   );
 }

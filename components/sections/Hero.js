@@ -1,5 +1,5 @@
 'use client';
-
+import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { personalInfo, typingRoles, techStack } from '@/data/index';
 import styles from './Hero.module.css';
@@ -62,114 +62,129 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className={styles.hero} id="home">
-      <div className={styles.gridBg} />
-      <div className={styles.blobOne} />
-      <div className={styles.blobTwo} />
+  <section className={styles.hero} id="home">
+    <div className={styles.gridBg} />
+    <div className={styles.blobOne} />
+    <div className={styles.blobTwo} />
 
-      <div className={styles.inner}>
+    <div className={styles.inner}>
 
-        {/* ── Left: Text ── */}
-        <div className={styles.textSide}>
+      {/* ── Left: Text ── */}
+      <motion.div
+        className={styles.textSide}
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+      >
+        <div className={styles.tag}>
+          <span className={styles.tagDot} />
+          Available for Freelance Work
+        </div>
 
-          <div className={styles.tag}>
-            <span className={styles.tagDot} />
-            Available for Freelance Work
+        <h1 className={styles.name}>
+          Hi, I&apos;m <span className={styles.highlight}>Rizwan</span>
+          <br />
+          Ahmad
+        </h1>
+
+        <p className={styles.role}>
+          I build&nbsp;
+          <span className={styles.typedText} ref={typedRef} />
+          <span className={styles.cursor} />
+        </p>
+
+        <p className={styles.bio}>{personalInfo.bio}</p>
+
+        <div className={styles.cta}>
+          <a href="#projects" className={styles.btnPrimary}>
+            🚀 View Projects
+          </a>
+          <a href="#contact" className={styles.btnOutline}>
+            📬 Contact Me
+          </a>
+          <a href={personalInfo.resumeUrl} className={styles.btnGhost} download>
+            ⬇ Download Resume
+          </a>
+        </div>
+
+        <div className={styles.socials}>
+          <span className={styles.socialLabel}>Find me on</span>
+          <a
+            href={personalInfo.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.socialLink}
+            aria-label="GitHub"
+          >
+            <GithubIcon />
+          </a>
+          <a
+            href={personalInfo.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.socialLink}
+            aria-label="LinkedIn"
+          >
+            <LinkedinIcon />
+          </a>
+          <a
+            href={`mailto:${personalInfo.email}`}
+            className={styles.socialLink}
+            aria-label="Email"
+          >
+            <EmailIcon />
+          </a>
+        </div>
+      </motion.div>
+
+      {/* ── Right: Image ── */}
+      <motion.div
+        className={styles.imageSide}
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+      >
+        <div className={styles.profileCard}>
+          <div className={styles.ring} />
+          <div className={styles.ringTwo} />
+          <div className={styles.profileImg}>👨‍💻</div>
+          <div className={styles.badgeOne}>
+            <span className={styles.dotGreen} />
+            Open to Work
           </div>
-
-          <h1 className={styles.name}>
-            Hi, I&apos;m <span className={styles.highlight}>Rizwan</span>
-            <br />
-            Ahmad
-          </h1>
-
-          <p className={styles.role}>
-            I build&nbsp;
-            <span className={styles.typedText} ref={typedRef} />
-            <span className={styles.cursor} />
-          </p>
-
-          <p className={styles.bio}>{personalInfo.bio}</p>
-
-          <div className={styles.cta}>
-            <a href="#projects" className={styles.btnPrimary}>
-              🚀 View Projects
-            </a>
-            <a href="#contact" className={styles.btnOutline}>
-              📬 Contact Me
-            </a>
-            <a href={personalInfo.resumeUrl} className={styles.btnGhost} download>
-              ⬇ Download Resume
-            </a>
+          <div className={styles.badgeTwo}>
+            <span className={styles.dotBlue} />
+            Full Stack Dev
           </div>
-
-          <div className={styles.socials}>
-            <span className={styles.socialLabel}>Find me on</span>
-            <a
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialLink}
-              aria-label="GitHub"
-            >
-              <GithubIcon />
-            </a>
-            <a
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialLink}
-              aria-label="LinkedIn"
-            >
-              <LinkedinIcon />
-            </a>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className={styles.socialLink}
-              aria-label="Email"
-            >
-              <EmailIcon />
-            </a>
+          <div className={styles.badgeThree}>
+            <span className={styles.dotSky} />
+            5+ Yrs Journey
           </div>
         </div>
 
-        {/* ── Right: Image ── */}
-        <div className={styles.imageSide}>
-          <div className={styles.profileCard}>
-            <div className={styles.ring} />
-            <div className={styles.ringTwo} />
-            <div className={styles.profileImg}>👨‍💻</div>
-            <div className={styles.badgeOne}>
-              <span className={styles.dotGreen} />
-              Open to Work
-            </div>
-            <div className={styles.badgeTwo}>
-              <span className={styles.dotBlue} />
-              Full Stack Dev
-            </div>
-            <div className={styles.badgeThree}>
-              <span className={styles.dotSky} />
-              5+ Yrs Journey
-            </div>
-          </div>
-
-          <div className={styles.techStack}>
-            {techStack.map((tech) => (
-              <span key={tech} className={styles.techChip}>
-                {tech}
-              </span>
-            ))}
-          </div>
+        <div className={styles.techStack}>
+          {techStack.map((tech, i) => (
+            <motion.span
+              key={tech}
+              className={styles.techChip}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.4 + i * 0.07 }}
+            >
+              {tech}
+            </motion.span>
+          ))}
         </div>
+      </motion.div>
 
+    </div>
+
+    <div className={styles.scrollIndicator}>
+      <div className={styles.scrollMouse}>
+        <div className={styles.scrollWheel} />
       </div>
-
-      <div className={styles.scrollIndicator}>
-        <div className={styles.scrollMouse}>
-          <div className={styles.scrollWheel} />
-        </div>
-        <span>Scroll Down</span>
-      </div>
-    </section>
-  );
+      <span>Scroll Down</span>
+    </div>
+  </section>
+);
 }

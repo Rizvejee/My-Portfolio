@@ -1,5 +1,5 @@
 'use client';
-
+import AnimateOnScroll from '@/components/ui/AnimateOnScroll';
 import { useState } from 'react';
 import { projects } from '@/data/index';
 import styles from './Projects.module.css';
@@ -39,7 +39,8 @@ export default function Projects() {
       <div className={styles.container}>
 
         {/* Header */}
-        <div className={styles.header}>
+        <AnimateOnScroll variant="fadeUp">
+          <div className={styles.header}>
           <span className={styles.tag}>My Work</span>
           <h2 className={styles.title}>
             Featured <span>Projects</span>
@@ -49,8 +50,10 @@ export default function Projects() {
             web and mobile technologies.
           </p>
         </div>
+        </AnimateOnScroll>
 
         {/* Filter Buttons */}
+        <AnimateOnScroll variant="fadeUp" delay={0.1}>
         <div className={styles.filters}>
           {categories.map((cat) => {
             const btnClass = active === cat
@@ -67,11 +70,13 @@ export default function Projects() {
             );
           })}
         </div>
+        </AnimateOnScroll>
 
         {/* Projects Grid */}
         <div className={styles.grid}>
-          {filtered.map((project) => (
-            <div key={project.id} className={styles.card}>
+            {filtered.map((project, i) => (
+         <AnimateOnScroll key={project.id} variant="scaleUp" delay={i * 0.1}>
+             <div className={styles.card}>
 
               {/* Image */}
               <div className={styles.cardImage}>
@@ -128,8 +133,9 @@ export default function Projects() {
               </div>
 
             </div>
-          ))}
-        </div>
+    </AnimateOnScroll>
+  ))}
+</div>
 
       </div>
     </section>
