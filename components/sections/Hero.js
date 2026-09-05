@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { personalInfo, typingRoles, techStack } from '@/data/index';
@@ -147,7 +148,17 @@ export default function Hero() {
         <div className={styles.profileCard}>
           <div className={styles.ring} />
           <div className={styles.ringTwo} />
-          <div className={styles.profileImg}>👨‍💻</div>
+          <div className={styles.profileImg}>
+            <Image
+              src="/images/profile.jpg"
+              alt="Rizwan Ahmad"
+              fill
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center top',
+              }}
+               />
+          </div>
           <div className={styles.badgeOne}>
             <span className={styles.dotGreen} />
             Open to Work

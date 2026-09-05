@@ -5,8 +5,8 @@ export const personalInfo = {
   email: 'rizve424@gmail.com',
   location: 'Hazro, Attock, Punjab, Pakistan',
   bio: 'A passionate Full Stack & Mobile App Developer from Pakistan, crafting modern web experiences and cross-platform mobile applications with clean code and thoughtful design since 2020.',
-  github: 'https://github.com/your-username',
-  linkedin: 'https://linkedin.com/in/your-username',
+  github: 'https://github.com/Rizvejee',
+  linkedin: 'https://linkedin.com/in/rizwan-ahmed-59165b342/',
   resumeUrl: '/resume.pdf',
 };
 

@@ -14,13 +14,13 @@ const contactInfo = [
   {
     icon: '💼',
     label: 'GitHub',
-    value: 'github.com/your-username',
+    value: personalInfo.github.replace('https://', ''),
     href: personalInfo.github,
   },
   {
     icon: '🔗',
     label: 'LinkedIn',
-    value: 'linkedin.com/in/your-username',
+    value: personalInfo.linkedin.replace('https://', ''),
     href: personalInfo.linkedin,
   },
   {
