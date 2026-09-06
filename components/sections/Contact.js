@@ -1,8 +1,13 @@
 'use client';
 import AnimateOnScroll from '@/components/ui/AnimateOnScroll';
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { personalInfo } from '@/data/index';
 import styles from './Contact.module.css';
+
+const SERVICE_ID  = 'service_5h1h9rd';   // ← اپنا ڈالیں
+const TEMPLATE_ID = 'template_o3hqe4h';  // ← اپنا ڈالیں
+const PUBLIC_KEY  = 'y4zZsFn_KDtk18Jdx';        // ← اپنا ڈالیں
 
 const contactInfo = [
   {
@@ -44,14 +49,31 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
-    setTimeout(() => {
+
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name:  formData.name,
+          from_email: formData.email,
+          subject:    formData.subject,
+          message:    formData.message,
+        },
+        PUBLIC_KEY
+      );
+
       setStatus('sent');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setStatus('idle'), 4000);
-    }, 1500);
+
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    }
   };
 
   return (
@@ -89,7 +111,6 @@ export default function Contact() {
                   let&apos;s build something great together.
                 </p>
 
-                {/* Contact Items */}
                 <div className={styles.contactItems}>
                   {contactInfo.map((item) => (
                     <div key={item.label} className={styles.contactItem}>
@@ -120,7 +141,6 @@ export default function Contact() {
                   ))}
                 </div>
 
-                {/* Availability Badge */}
                 <div className={styles.availability}>
                   <span className={styles.availDot} />
                   <span className={styles.availText}>
@@ -139,7 +159,6 @@ export default function Contact() {
 
                 <form onSubmit={handleSubmit} className={styles.form}>
 
-                  {/* Name + Email */}
                   <div className={styles.formRow}>
                     <div className={styles.formGroup}>
                       <label className={styles.label} htmlFor="name">
@@ -173,7 +192,6 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  {/* Subject */}
                   <div className={styles.formGroup}>
                     <label className={styles.label} htmlFor="subject">
                       Subject
@@ -190,7 +208,6 @@ export default function Contact() {
                     />
                   </div>
 
-                  {/* Message */}
                   <div className={styles.formGroup}>
                     <label className={styles.label} htmlFor="message">
                       Message
@@ -207,7 +224,6 @@ export default function Contact() {
                     />
                   </div>
 
-                  {/* Submit */}
                   <button
                     type="submit"
                     className={styles.submitBtn}
@@ -215,12 +231,19 @@ export default function Contact() {
                   >
                     {status === 'sending' && '⏳ Sending...'}
                     {status === 'sent'    && '✅ Message Sent!'}
+                    {status === 'error'   && '❌ Try Again'}
                     {status === 'idle'    && '🚀 Send Message'}
                   </button>
 
                   {status === 'sent' && (
                     <p className={styles.successMsg}>
                       Thank you! I will get back to you soon.
+                    </p>
+                  )}
+
+                  {status === 'error' && (
+                    <p className={styles.errorMsg}>
+                      Something went wrong. Please try again.
                     </p>
                   )}
 
